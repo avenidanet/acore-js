@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Acore Javascript | TEST</title>
+	<!-- Acore Javascript -->
+	<script src="acore.js"></script>
+</head>
+<body>
+<div class="container">
+	<div id="jq-header">
+		<img src="" alt="" />
+		<a href="#" rel="rel01">Test</a>
+	</div>
+	<div class="cac">
+		<form id="myForm" action="ajax.php">
+			<select name="paises" id="paises">
+				<option value="1">Costa rica</option>
+				<option value="2">Panama</option>
+				<option value="3">Honduras</option>
+			</select>
+			<input type="text" name="nombre"> 
+			<input type="text" name="apellido">
+			<input type="file" name="cv"/>
+		</form>
+	</div>
+</div>
+<!-- JQuery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script>
+/*
+ * Test by https://gist.github.com/edvinasbartkus/1599884
+ */
+window.prev_result = null;
+var test = function (f) {
+	var a,b;
+	a = new Date().getTime();
+	//10000 calls functions.
+	for(var i=0; i<10000; i++) {
+		f();
+	};
+	b = new Date().getTime();
+	
+	var result = b-a;
+	if(window.prev_result) {
+		var diff = result / window.prev_result * 100;
+		console.log('JQuery ' + window.prev_result + "ms | ACore " + result + "ms => " + Math.round(diff)+"% de la duración de JQuery.");
+		window.prev_result = null;
+	} else {
+		window.prev_result = result;
+	}
+};
+
+test(function() { var elements = $("#jq-header"); });
+test(function() { var elements = $a("#jq-header"); });
+
+test(function() { var elements = $(".cac"); });
+test(function() { var elements = $a(".cac") });
+
+test(function() { var elements = $(".cac input"); });
+test(function() { var elements = $a("@.cac input"); });
+
+test(function() { var elements = $("div"); });
+test(function() { var elements = $a("div") });
+
+test(function() { var elements = $("div").attr('id'); });
+test(function() { var elements = $a("@div").attr('id'); });
+
+test(function() { var elements = $("div").attr('id','nuevo'); });
+test(function() { var elements = $a("@div").attr('id','nuevo'); });
+
+test(function() { var elements = $("div").css('height'); });
+test(function() { var elements = $a("@div").css('height') });
+
+test(function() { var elements = $("div").css('height','50px'); });
+test(function() { var elements = $a("@div").css('height','50px') });
+</script>
+</body>
+</html>
