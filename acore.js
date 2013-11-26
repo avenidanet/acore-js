@@ -216,7 +216,7 @@ window.Element.prototype.valid = function(){
 	if(q[1].length > 0){
 		return q[1];
 	}
-	return true;
+	return 0;
 }
 window.NodeList.prototype.valid = function() {
 	return this[0].valid();
